@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
   it { should validate_uniqueness_of(:email) }
   it { should validate_presence_of(:password_digest) }
   it { should have_secure_password }
+  it { should have_many(:todos) }
 
   it 'Do not allow emails with bad format' do
     user.email = 'foo@bar'
