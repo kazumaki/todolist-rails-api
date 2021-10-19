@@ -14,7 +14,7 @@ class Api::V1::TodosController < ApplicationController
     begin
       user_id = HashWithIndifferentAccess.new(JWT.decode(token, secret_key)[0])[:user_id]
       @current_user = User.find(user_id)
-    rescue JWT::DecodeError => e
+    rescue JWT::DecodeError, ActiveRecord::RecordNotFound   => e
       render json: { errors: e.message }, status: :unauthorized
     end
   end
